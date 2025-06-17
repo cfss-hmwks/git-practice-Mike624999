@@ -10,6 +10,7 @@ output:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
+library(gapminder)
 ```
 
 ## R Markdown
@@ -53,3 +54,32 @@ ggplot(mtcars)+
        caption = "Source: mtcars")
 
 ```
+### Gapminder example
+```{r}
+data(gapminder)
+```
+
+### Back to MTCARS
+```{r}
+data(mtcars)
+head(mtcars)
+```
+
+```{r}
+ggplot(mtcars, aes(x = mpg, y = wt)) +
+  #geom_point()
+  #geom_text(label = rownames(mtcars), check_overlap = TRUE)
+       geom_point(aes(x = mpg, y = wt, 
+                      color = factor(cyl),
+                      shape = factor(cyl),
+                      size = hp)) +
+      labs(title = "Car MPG vs weight", 
+       x = 'Miles per gallon',
+       y = 'Car weight',
+       shape ="Cylinders", size="Horsepower", color = "Cylinders",
+       caption = "Source: mtcars") +
+  theme_bw() +
+  scale_color_manual(values = c("black", "gray", "blue") )
+
+```
+
